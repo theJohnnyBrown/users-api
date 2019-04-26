@@ -35,6 +35,6 @@
   [files]
   (mapcat #(apply path->rows %) files))
 
-(def sort-orders {:gender (partial sort-by (juxt :gender (comp :last-name str/lower-case)))
-                  :last-name   #(reverse (sort-by (comp :last-name str/lower-case) %))
+(def sort-orders {:gender (partial sort-by (juxt :gender (comp str/lower-case :last-name)))
+                  :last-name   #(reverse (sort-by (comp str/lower-case str/trim :last-name) %))
                   :dob    (partial sort-by :dob)})

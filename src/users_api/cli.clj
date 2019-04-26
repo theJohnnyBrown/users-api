@@ -32,7 +32,7 @@
 
 (defn user-str [user]
   (let [u (-> user
-              (update :dob #(.format % (DateTimeFormatter/ofPattern "M/d/YYYY")))
+              (update :dob #(.format % (DateTimeFormatter/ofPattern "M/d/uuuu")))
               (update :gender name))]
    (str/join ", " (for [k data/user-keys] (get u k)))))
 
@@ -48,7 +48,6 @@
                                  (map #(vector #" *, *" %)
                                       (get-in opts [:options :commas-file]))))
 
-            sort-fn (get data/sort-orders (get-in opts [:options :sort-order]))
-            _ (prn opts sort-fn)]
+            sort-fn (get data/sort-orders (get-in opts [:options :sort-order]))]
         (doseq [r (sort-fn rows)]
           (prn (user-str r)))))))
