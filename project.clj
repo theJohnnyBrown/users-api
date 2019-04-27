@@ -6,6 +6,8 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/tools.cli "0.4.2"]
                  [metosin/compojure-api "1.1.11"]
-                 [ring "1.7.1"]]
-  :ring {:handler users-api.web/app}
+                 [ring "1.7.1"]
+                 [ring/ring-defaults "0.3.2"]]
+  :ring {:handler users-api.web/app
+         :init users-api.web/init-data}
   :profiles {:dev {:plugins [[lein-ring "0.10.0"]]}})

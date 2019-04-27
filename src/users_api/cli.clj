@@ -25,8 +25,8 @@
 
    ["-z" "--sort ORDER" "Key by which to sort the results"
     :parse-fn keyword
-    :default :last-name
-    :validate [#{:dob :gender :last-name}
+    :default :name
+    :validate [#{:birthdate :gender :name}
                "Please choose one of \"dob\", \"gender\" \"last-name\" "]
     :id :sort-order]])
 
@@ -41,11 +41,11 @@
     (if-let [e (:errors opts)]
       (prn e)
       (let [rows (data/data-seq (concat
-                                 (map #(vector #" *\| *" %)
+                                 (map #(vector data/pipe-sep %)
                                       (get-in opts [:options :pipes-file]))
-                                 (map #(vector #" +" %)
+                                 (map #(vector data/space-sep %)
                                       (get-in opts [:options :spaces-file]))
-                                 (map #(vector #" *, *" %)
+                                 (map #(vector data/comma-sep %)
                                       (get-in opts [:options :commas-file]))))
 
             sort-fn (get data/sort-orders (get-in opts [:options :sort-order]))]

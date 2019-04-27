@@ -36,5 +36,10 @@
   (mapcat #(apply path->rows %) files))
 
 (def sort-orders {:gender (partial sort-by (juxt :gender (comp str/lower-case :last-name)))
-                  :last-name   #(reverse (sort-by (comp str/lower-case str/trim :last-name) %))
-                  :dob    (partial sort-by :dob)})
+                  :name   #(reverse (sort-by (comp str/lower-case str/trim :last-name) %))
+                  :birthdate    (partial sort-by :dob)})
+
+;; regexes for splitting strings by the appropriate separator
+(def pipe-sep #" *\| *")
+(def space-sep #" +")
+(def comma-sep #" *, *")

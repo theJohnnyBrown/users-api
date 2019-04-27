@@ -20,8 +20,8 @@
      (is (= test-data test-rows)))
 
    (testing "Rows are sorted correctly"
-     (let [name-sort (:last-name sort-orders)
-           dob-sort (:dob sort-orders)
+     (let [name-sort (:name sort-orders)
+           dob-sort (:birthdate sort-orders)
            gender-sort (:gender sort-orders)]
       (is (= (map :last-name (gender-sort test-data))
              ["aaa" "BBB" "zAz" "Brown"]))
